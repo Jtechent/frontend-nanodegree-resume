@@ -13,7 +13,7 @@ These are HTML strings. As part of the course, you'll be using JavaScript functi
 replace the %data% placeholder text you see in them.
 */
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
-var HTMLheaderRole = '<span>%data%</span><hr>';
+var HTMLheaderRole = '<span class="role">%data%</span><hr>';
 
 var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
 var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
@@ -114,6 +114,7 @@ function initializeMap() {
   For the map to be displayed, the googleMap var must be
   appended to #mapDiv in resumeBuilder.js. 
   */
+  console.log($('#map'));
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
 
@@ -238,12 +239,12 @@ function initializeMap() {
 Uncomment the code below when you're ready to implement a Google Map!
 */
 
-// Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+//Calls the initializeMap() function when the page loads
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+map.fitBounds(mapBounds);
+});
