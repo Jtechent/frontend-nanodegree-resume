@@ -6,7 +6,7 @@ var bio = {
   "role": "Web Developer",
   "contacts": {
     "email": "techentin4@gmail.com",
-    "mobile": 6036822774,
+    "mobile": "6036822774",
     "github": "Jtechent",
     "location": "Manchester, NH"
   },
@@ -30,7 +30,7 @@ var bio = {
     {
       "name": "York College of PA",
       "location": "441 Country Club Rd, York, PA",
-      "major": "Economics",
+      "majors": ["Economics"],
       "dates": "2013",
       "degree": 'none',
       "url": 'idk'
@@ -52,23 +52,23 @@ var bio = {
         title: "Blah Blah",
         dates: "January 1st 1999-March 12 2012",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla diam tellus, gravida sed mattis non euismod effictur nibh. Sed cansequat erat nec dolor aliquet efficitur pharetra lacus cursus.",
-        images: "https://placebear.com/200/300"
+        images: ["https://placebear.com/200/300"]
       }
     ]
   };
 
 //!!!functions!!!  javascript(css(HTML)) -> cool websites!!!
-function DisplayContacts (context) {
-  var container = $(context),
-      contacts = bio["contacts"];
-  container.append(HTMLmobile.replace('%data%', contacts["mobile"]),
-                   HTMLemail.replace('%data%', contacts["email"]),
-                   HTMLgithub.replace('%data%', contacts["github"]),
-                   HTMLlocation.replace('%data%', contacts["location"])
-                   );
-}
   
   bio.display = function () {
+  function DisplayContacts (context) {
+    var container = $(context),
+        contacts = bio["contacts"];
+    container.append(HTMLmobile.replace('%data%', contacts["mobile"]),
+                     HTMLemail.replace('%data%', contacts["email"]),
+                     HTMLgithub.replace('%data%', contacts["github"]),
+                     HTMLlocation.replace('%data%', contacts["location"])
+                     );
+  }
     //display role
     $('#header').prepend( HTMLheaderName.replace('%data%', bio['name']), HTMLheaderRole.replace('%data%', bio['role']));
     //display bio pic
@@ -93,9 +93,12 @@ function DisplayContacts (context) {
       var current = $.parseHTML(HTMLprojectStart);
       $(current).append(HTMLprojectTitle.replace('%data%', work.title),
                        HTMLprojectDates.replace('%data%', work.dates),
-                       HTMLprojectDescription.replace('%data%', work.description),
-                       HTMLprojectImage.replace('%data%', work.images)
+                       HTMLprojectDescription.replace('%data%', work.description)
                        );
+      for (var image in work.images){
+        $(current).append(HTMLprojectImage.replace('%data%', work.images[image]));
+
+      }
       $('#projects').append(current); 
     }
   };
@@ -106,18 +109,18 @@ education.display = function () {
   for (var school=0;school<schools.length;school++){
     $('#education').append(HTMLschoolStart);
     $('.education-entry:last').append(
-        HTMLschoolName.replace('%data%', schools[school]['name']),
+        HTMLschoolName.replace('%data%', schools[school]['name']) + 
+        HTMLschoolMajor.replace('%data%', schools[school]['majors']),
         HTMLschoolDegree.replace('%data%', schools[school]['degree']),
         HTMLschoolDates.replace('%data%', schools[school]['dates']),
-        HTMLschoolLocation.replace('%data%', schools[school]['location']),
-        HTMLschoolMajor.replace('%data%', schools[school]['major'])
+        HTMLschoolLocation.replace('%data%', schools[school]['location']) 
         );
   }
   $('#education').append(HTMLonlineClasses);
   for (var course=0;course<online.length;course++){
     $('#education').append(HTMLschoolStart);
     $('.education-entry:last').append(
-        HTMLonlineTitle.replace("%data%",online[course]["title"]),
+        HTMLonlineTitle.replace("%data%",online[course]["title"]) + 
         HTMLonlineSchool.replace("%data%",online[course]["school"]),
         HTMLonlineDates.replace("%data%",online[course]["date"]),
         HTMLonlineURL.replace("%data%",online[course]["url"])
