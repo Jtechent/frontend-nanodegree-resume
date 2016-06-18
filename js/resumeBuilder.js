@@ -95,7 +95,7 @@ var bio = {
                        HTMLprojectDates.replace('%data%', work.dates),
                        HTMLprojectDescription.replace('%data%', work.description)
                        );
-      for (var image in work.images){
+      for (var image=0;image <work.images.length;image++){
         $(current).append(HTMLprojectImage.replace('%data%', work.images[image]));
 
       }
